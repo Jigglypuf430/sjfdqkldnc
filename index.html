@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NSW Digital Licence – Prototype</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Your custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- iOS status-bar spacer -->
+  <div class="h-6"></div>
+
+  <!-- Top bar -->
+  <header class="flex items-center justify-between px-3 py-2 bg-white shadow-sm sticky top-0 z-30">
+    <button class="text-2xl" aria-label="Back">←</button>
+    <h1 class="text-base font-semibold">Provisional Driver Licence</h1>
+    <button class="text-2xl" aria-label="Menu">⋮</button>
+  </header>
+
+  <!-- Red ribbon accent -->
+  <div class="ribbon"></div>
+
+  <!-- Licence card -->
+  <main class="max-w-sm mx-auto bg-white shadow-md rounded-b-lg overflow-hidden">
+    <!-- Make THIS the hologram container -->
+    <section class="p-4 holo">
+      <!-- Hologram layer goes first -->
+      <div class="holo-overlay"></div>
+
+      <!-- NSW logo + portrait -->
+      <div class="flex justify-between items-start">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/NSW_Government_logo.svg"
+             alt="NSW" class="h-6" />
+        <figure class="w-32 h-40 rounded-sm overflow-hidden shadow-inner border border-gray-200">
+          <img src="https://placehold.co/240x300" alt="Portrait" class="object-cover w-full h-full" />
+        </figure>
+      </div>
+
+      <!-- Refresh timestamp -->
+      <div class="text-right text-xs text-gray-600 mt-1">
+        <p class="font-semibold">Refreshed</p>
+        <p id="refDate">17 Jan 2025</p>
+        <p id="refTime">10:14 am</p>
+      </div>
+
+      <!-- Name / licence / QR -->
+      <div class="mt-4 flex flex-col gap-2">
+        <h2 class="text-2xl font-bold tracking-wide leading-6">
+          Callum John BUSH-BRADY
+        </h2>
+        <div class="flex gap-4 mt-2">
+          <div class="flex-1 text-sm">
+            <p class="text-gray-600">Licence number</p>
+            <p class="text-xl font-bold">25216610</p>
+
+            <p class="mt-2 text-gray-600">Expiry</p>
+            <p class="text-xl font-bold">13 Jul 2026</p>
+          </div>
+          <div id="qrcode" class="w-32 h-32 flex-shrink-0"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secondary details -->
+    <section class="p-4 pt-0 space-y-4 text-sm">
+      <div>
+        <p class="text-gray-600">Date of birth</p>
+        <p class="text-xl font-bold">
+          19 Dec 2007
+          <span class="inline-block text-white bg-blue-600 rounded-full px-2 py-0.5 text-xs">Under 18</span>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 text-base font-medium">
+        <div class="bg-gray-100 p-3 rounded-lg">
+          <p class="text-gray-600 text-sm mb-1">Class</p>
+          C P1
+        </div>
+        <div class="bg-gray-100 p-3 rounded-lg">
+          <p class="text-gray-600 text-sm mb-1">Conditions</p>
+          Y
+        </div>
+      </div>
+
+      <div class="bg-gray-100 p-3 rounded-lg whitespace-pre-line leading-snug">
+        <p class="text-gray-600 text-sm mb-1">Address</p>
+        UNIT 21,
+        49-53 ALBION ST,
+        WAVERLEY NSW 2024
+      </div>
+    </section>
+  </main>
+
+  <!-- Liquid-distortion SVG filter -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="liquidDistortion">
+      <feTurbulence id="turbulence" type="turbulence"
+                    baseFrequency="0.012 0.022" numOctaves="3"/>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence"
+                         scale="28" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <!-- Tilt logic -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* Tailwind layers (CDN injects base/components/utilities) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Page base look */
+body{
+  background:#f3f4f6; /* gray-100 */
+  margin:0;
+  font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:#111827;      /* gray-900 */
+}
+
+/* Red ribbon accent */
+.ribbon{
+  height:4px;
+  background:linear-gradient(90deg,#b91c1c,#dc2626 50%,#b91c1c);
+}
+
+/* ===== Hologram ===== */
+.holo{
+  position:relative;
+  overflow:hidden;                 /* clip overlay to the card */
+  --tilt-sensitivity:1;            /* change to 1.5, 2, etc. */
+  /* OPTIONAL: start overlay lower so it doesn’t cover the portrait
+     --holo-top: 0%;   (set to 35% if you want it to start below photo) */
+}
+
+/* Colourful layer that pans with tilt */
+.holo-overlay{
+  position:absolute;
+  left:0; width:100%;
+  top:var(--holo-top, 0%);         /* tweak if you want it lower */
+  height:calc(100% - var(--holo-top, 0%));
+  background:url("assets/holo.png") center/cover no-repeat;
+  opacity:0.78;                    /* “pop” without shimmer */
+  filter:
+    url(#liquidDistortion)
+    saturate(1.35)
+    contrast(1.15);
+  pointer-events:none;
+  z-index:0;
+
+  /* Waratah mask */
+  -webkit-mask:url("assets/waratah-mask.png") center/contain no-repeat;
+          mask:url("assets/waratah-mask.png") center/contain no-repeat;
+}
+
+/* Keep all content above the overlay */
+.holo > *:not(.holo-overlay){
+  position:relative;
+  z-index:10;
+}
+
+/* Debug helper (uncomment to confirm bounds)
+.holo-overlay{ background:hotpink !important; }
+*/
